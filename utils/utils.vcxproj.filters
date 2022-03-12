@@ -19,4 +19,27 @@
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="make_unique.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="cpp_version.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="namespace_def.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="algorithm.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="copy.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="sort.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="binary_tree.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
 </Project>
