@@ -87,17 +87,17 @@ std::vector<std::vector<T>> zigzag_level_order_traverse(TreeNode<T>*& root)
 	}
 	bool reverse = false;
 	while (!q.empty()) {
-		int levelnum = q.size();
-		const int total = levelnum;
+		const int levelnum = q.size();
+		int curnum = levelnum;
 		std::vector<T> level(total);
-		while (levelnum > 0) {
+		while (curnum > 0) {
 			auto node = q.front();
 			q.pop();
 			if (reverse) {
-				level[levelnum - 1] = node->val_;
+				level[curnum - 1] = node->val_;
 			}
 			else {
-				level[total - levelnum] = node->val;
+				level[levelnum - curnum] = node->val_;
 			}
 			
 			if (node->left_) {
@@ -106,7 +106,7 @@ std::vector<std::vector<T>> zigzag_level_order_traverse(TreeNode<T>*& root)
 			if (node->right_) {
 				q.push(node->right_);
 			}
-			--levelnum;
+			--curnum;
 		}
 
 		ret.push_back(level);
