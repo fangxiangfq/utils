@@ -2,7 +2,7 @@
 
 #include "namespace_def.h"
 
-NameSpace_Beg(MyAlgorithm)
+NameSpace_Beg(utils)
 template<typename InputIterator, 
 		 typename OutputIterator, 
 	     typename Predicate>
@@ -17,4 +17,4 @@ OutputIterator copy_if(InputIterator  begin,
 	}
 	return destBegin;
 }
-NameSpace_End(MyAlgorithm)
+NameSpace_End(utils)

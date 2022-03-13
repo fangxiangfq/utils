@@ -2,10 +2,10 @@
 #include <algorithm>
 #include <vector>
 #include <queue>
+#include <stack>
 #include "namespace_def.h"
 
-NameSpace_Beg(MyAlgorithm)
-NameSpace_Beg(BinaryTree)
+NameSpace_Beg(utils)
 
 template<typename T>
 struct TreeNode {
@@ -19,12 +19,12 @@ struct TreeNode {
 };
 
 template<typename T, typename It>
-TreeNode<T>* createBinaryTree(It& beg, It end, const T& invalid)
+TreeNode<T>* create_binarytree(It& beg, It end, const T& invalid)
 {
 	if (beg < end && *beg != invalid) {
 		TreeNode<T>* root = new TreeNode<T>(*beg);
-		TreeNode<T>* l = createBinaryTree<T>((beg < end) ? ++beg : end, end, invalid);
-		TreeNode<T>* r = createBinaryTree<T>((beg < end) ? ++beg : end, end, invalid);
+		TreeNode<T>* l = create_binarytree<T>((beg < end) ? ++beg : end, end, invalid);
+		TreeNode<T>* r = create_binarytree<T>((beg < end) ? ++beg : end, end, invalid);
 		root->left_ = l;
 		root->right_ = r;
 		return root;
@@ -34,40 +34,18 @@ TreeNode<T>* createBinaryTree(It& beg, It end, const T& invalid)
 }
 
 template<typename T>
-void distroyBinaryTree(TreeNode<T>*& root)
+void distroy_binarytree(TreeNode<T>*& root)
 {
 	if (root) {
-		distroyBinaryTree(root->left_);
-		distroyBinaryTree(root->right_);
+		distroy_binarytree(root->left_);
+		distroy_binarytree(root->right_);
 		delete root;
 		root = nullptr;
 	}
 }
 
-template<typename T, typename F>
-void levelOrderTraverse(TreeNode<T>*& root, F func)
-{
-	std::queue<TreeNode<T>*> q;
-	if (root) {
-		q.push(root);
-	}
-
-	while (!q.empty()) {
-		auto p = q.front();
-		q.pop();
-		func(p->val_);
-		if (p->left_) {
-			q.push(p->left_);
-		}
-
-		if (p->right_) {
-			q.push(p->right_);
-		}
-	}
-}
-
 template<typename T>
-std::vector<std::vector<T>> levelOrderTraverse(TreeNode<T>*& root)
+std::vector<std::vector<T>> level_order_traverse(TreeNode<T>*& root)
 {
 	std::queue<TreeNode<T>*> q;
 	std::vector<std::vector<T>> ret;
@@ -100,7 +78,47 @@ std::vector<std::vector<T>> levelOrderTraverse(TreeNode<T>*& root)
 }
 
 template<typename T>
-bool isSymmetric(TreeNode<T>* left, TreeNode<T>* right) {
+std::vector<std::vector<T>> zigzag_level_order_traverse(TreeNode<T>*& root)
+{
+	std::queue<TreeNode<T>*> q;
+	std::vector<std::vector<T>> ret;
+	if (root) {
+		q.push(root);
+	}
+	bool reverse = false;
+	while (!q.empty()) {
+		int levelnum = q.size();
+		const int total = levelnum;
+		std::vector<T> level(total);
+		while (levelnum > 0) {
+			auto node = q.front();
+			q.pop();
+			if (reverse) {
+				level[levelnum - 1] = node->val_;
+			}
+			else {
+				level[total - levelnum] = node->val;
+			}
+			
+			if (node->left_) {
+				q.push(node->left_);
+			}
+			if (node->right_) {
+				q.push(node->right_);
+			}
+			--levelnum;
+		}
+
+		ret.push_back(level);
+
+	}
+
+	return ret;
+}
+
+template<typename T>
+bool symmetric(TreeNode<T>* left, TreeNode<T>* right) 
+{
 	if (!left && !right) {
 		return true;
 	}
@@ -109,20 +127,22 @@ bool isSymmetric(TreeNode<T>* left, TreeNode<T>* right) {
 		return false;
 	}
 
-	return isSymmetric(left->left_, right->right_) && isSymmetric(left->right_, right->left_);
+	return symmetric(left->left_, right->right_) && symmetric(left->right_, right->left_);
 }
 
 template<typename T>
-bool isSymmetric(TreeNode<T>* root) {
+bool symmetric(TreeNode<T>* root) 
+{
 	if (!root) {
 		return true;
 	}
 
-	return isSymmetric(root->left_, root->right_);
+	return symmetric(root->left_, root->right_);
 }
 
 template<typename T>
-bool isSameTree(TreeNode<T>* p, TreeNode<T>* q) {
+bool is_same_tree(TreeNode<T>* p, TreeNode<T>* q) 
+{
 	if (!p && !q) {
 		return true;
 	}
@@ -131,35 +151,98 @@ bool isSameTree(TreeNode<T>* p, TreeNode<T>* q) {
 		return false;
 	}
 
-	return isSameTree(p->left_, q->left_) && isSameTree(p->right_, q->right_);
+	return is_same_tree(p->left_, q->left_) && is_same_tree(p->right_, q->right_);
 }
 
 template<typename T>
-void preorderTraverse(TreeNode<T>* root, std::vector<T>& ret) {
+void preorder_traverse(TreeNode<T>* root, std::vector<T>& ret) 
+{
 	if (root) {
 		ret.push_back(root->val_);
-		preorderTraverse(root->left_, ret);
-		preorderTraverse(root->right_, ret);
+		preorder_traverse(root->left_, ret);
+		preorder_traverse(root->right_, ret);
 	}
 }
 
 template<typename T>
-void inorderTraverse(TreeNode<T>* root, std::vector<T>& ret) {
+void inorder_traverse(TreeNode<T>* root, std::vector<T>& ret) 
+{
 	if (root) {
-		inorderTraverse(root->left_, ret);
+		inorder_traverse(root->left_, ret);
 		ret.push_back(root->val_);
-		inorderTraverse(root->right_, ret);
+		inorder_traverse(root->right_, ret);
 	}
 }
 
 template<typename T>
-void postorderTraverse(TreeNode<T>* root, std::vector<T>& ret) {
+void postorder_traverse(TreeNode<T>* root, std::vector<T>& ret) 
+{
 	if (root) {
-		postorderTraverse(root->left_, ret);
-		postorderTraverse(root->right_, ret);
+		postorder_traverse(root->left_, ret);
+		postorder_traverse(root->right_, ret);
 		ret.push_back(root->val_);
 	}
 }
 
-NameSpace_End(BinaryTree)
-NameSpace_End(MyAlgorithm)
+template<typename T>
+void preorder_traverse_tterative(TreeNode<T>* root, std::vector<T>& ret) 
+{
+	TreeNode<T>* cur = root;
+	std::stack<TreeNode<T>*> s;
+	while (cur || !s.empty()) {
+		if (cur) {
+			ret.push_back(cur->val_);
+			s.push(cur);
+			cur = cur->left_;
+		}
+		else {
+			cur = s.top();
+			s.pop();
+			cur = cur->right_;
+		}
+	}
+}
+
+template<typename T>
+void inorder_traverse_iterative(TreeNode<T>* root, std::vector<T>& ret) 
+{
+	TreeNode<T>* cur = root;
+	std::stack<TreeNode<T>*> s;
+	while (cur || !s.empty()) {
+		if (cur) {
+			s.push(cur);
+			cur = cur->left_;
+		}
+		else {
+			cur = s.top();
+			s.pop();
+			ret.push_back(cur->val_);
+			cur = cur->right_;
+		}
+	}
+}
+
+template<typename T>
+void postorder_traverse_iterative(TreeNode<T>* root, std::vector<T>& ret) 
+{
+	TreeNode<T>* cur = root;
+	std::stack<std::pair<TreeNode<T>*, bool>> s;
+	while (cur || !s.empty()) {
+		if (cur) {
+			s.emplace(cur, false);
+			cur = cur->left_;
+		}
+		else {
+			if (!s.top().second) {
+				s.top().second = true;
+				cur = s.top().first->right_;
+			}
+			else {
+				ret.push_back(s.top().first->val_);
+				s.pop();
+			}
+		}
+	}
+}
+
+NameSpace_End(utils)
