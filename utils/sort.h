@@ -68,6 +68,35 @@ void heap_sort(const It& beg, const It& end)
 	}
 }
 
+void quick_sort(std::vector<int>& nums, int low, int high)
+{
+	int tmp = nums[low];
+	int first = low;
+	int last = high;
+	while (first < last)
+	{
+		while (first < last && nums[last] >= tmp) {
+			--last;
+		}
+
+		if (first < last) {
+			nums[first++] = nums[last];
+		}
+
+		while (first < last && nums[first] <= tmp) {
+			++first;
+		}
+
+		if (first < last) {
+			nums[last--] = nums[first];
+		}
+	}
+	
+	nums[first] = tmp;
+	quick_sort(nums, low, first - 1);
+	quick_sort(nums, first + 1, high);
+}
+
 NameSpace_End(utils)
 
 
