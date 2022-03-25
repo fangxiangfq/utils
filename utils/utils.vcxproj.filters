@@ -50,5 +50,11 @@
     <ClInclude Include="singleton.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="nocopyable.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="observer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

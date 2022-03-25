@@ -1,7 +1,7 @@
 #pragma once
 #include <algorithm>
 
-NameSpace_Beg(utils)
+Utils_Beg
 
 template<typename It, typename Comp = std::less<typename It::value_type>>
 void heapfy(const It& beg, const It& cur, const It& end)
@@ -97,7 +97,8 @@ void quick_sort(std::vector<int>& nums, int low, int high)
 	quick_sort(nums, first + 1, high);
 }
 
-NameSpace_End(utils)
+Utils_End
+
 
 
 

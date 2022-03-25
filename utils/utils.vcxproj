@@ -161,6 +161,8 @@
     <ClInclude Include="lock.h" />
     <ClInclude Include="memory.h" />
     <ClInclude Include="namespace_def.h" />
+    <ClInclude Include="nocopyable.h" />
+    <ClInclude Include="observer.h" />
     <ClInclude Include="singleton.h" />
     <ClInclude Include="sort.h" />
     <ClInclude Include="time.h" />
