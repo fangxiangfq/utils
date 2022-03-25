@@ -44,5 +44,11 @@
     <ClInclude Include="memory.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="time.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="singleton.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
