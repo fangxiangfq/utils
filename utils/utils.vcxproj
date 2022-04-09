@@ -165,6 +165,7 @@
     <ClInclude Include="observer.h" />
     <ClInclude Include="singleton.h" />
     <ClInclude Include="sort.h" />
+    <ClInclude Include="str.h" />
     <ClInclude Include="time.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -56,5 +56,8 @@
     <ClInclude Include="observer.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="str.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
