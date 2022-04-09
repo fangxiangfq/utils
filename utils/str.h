@@ -24,7 +24,7 @@ static inline bool toupper(char ch)
 	return (ch >= 'a' && ch <= 'z') ? (ch & ~0x20) : ch;
 }
 
-static inline bool tolower(char ch)
+static inline char tolower(char ch)
 {
 	return (ch >= 'A' && ch <= 'Z') ? (ch | 0x20) : ch;
 }
